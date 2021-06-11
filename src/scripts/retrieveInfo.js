@@ -15,9 +15,9 @@ async function retrieveInfo(site) {
 
             [...site.fields].forEach((item) => {
                 values[item.name] = document
-                .querySelector(item.selector)
-                .innerText.replace(/\D/g, '');
-            })
+                    .querySelector(item.selector)
+                    .innerText.replace(/[^0-9.]/g, '');
+            });
 
             return values;
         }, site);

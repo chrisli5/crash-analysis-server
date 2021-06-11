@@ -4,17 +4,17 @@
         "ecmaVersion": 6,
         "sourceType": "module",
         "ecmaFeatures": {
-          "jsx": true
+            "jsx": true
         },
         "requireConfigFile": false
-      },
-      "parser": "@babel/eslint-parser",
-      "rules": {
+    },
+    "parser": "@babel/eslint-parser",
+    "rules": {
         "no-unused-vars": 0
-      },
-      "env": {
+    },
+    "env": {
         "browser": true,
         "node": true
-      },
+    },
     "extends": ["eslint:recommended", "airbnb-base", "prettier"]
 }

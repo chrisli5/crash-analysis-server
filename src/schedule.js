@@ -17,16 +17,20 @@ const bree = new Bree({
     jobs: [
         {
             name: 'archiveBustadice',
+            interval: 'at 11:00 pm'
         },
         {
             name: 'archiveBustabit',
+            interval: 'at 11:10 pm'
         },
         {
             name: 'archiveEthercrash',
+            interval: 'at 11:20 pm'
         },
         {
             name: 'archiveBustabit',
-        }
+            interval: 'at 11:30 pm'
+        },
     ],
 });
 

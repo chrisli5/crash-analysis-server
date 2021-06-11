@@ -1,31 +1,32 @@
-const mongoose = require('mongoose');
 const { parentPort } = require('worker_threads');
-const Item = require('../models/Item');
+const format = require('pg-format');
 const site = require('../config/sites.json').etherdice;
 const retrieveInfo = require('../scripts/retrieveInfo');
-const { MONGODB_URI } = require('../config/config');
+const db = require('../db');
 
 (async () => {
-    let db = null;
     try {
         // wait for a promise to finish
         const data = await retrieveInfo(site);
 
-        await mongoose.connect(MONGODB_URI, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        });
-        db = mongoose.connection;
+        await db.query(
+            format(
+                'INSERT INTO etherdice (users, bankRoll, investorProfit, totalBets, totalWagered) VALUES (%L)',
+                [
+                    data.users,
+                    data.bankRoll,
+                    data.investorProfit,
+                    data.totalBets,
+                    data.totalWagered,
+                ]
+            )
+        );
 
-        const itemToAdd = new Item({ name: site.name, ...data });
-        await itemToAdd.save();
-
-        db.close();
         // signal to parent that the job is done
         if (parentPort) parentPort.postMessage('done');
         else process.exit(0);
     } catch (err) {
-        db && db.close();
+        console.error(err);
         process.exit(1);
     }
 })();
