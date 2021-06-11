@@ -16,20 +16,20 @@ const bree = new Bree({
     root: path.join(__dirname, 'jobs'),
     jobs: [
         {
-            name: 'archiveBustadice',
-            interval: 'at 11:00 pm'
+            name: 'archiveBustabit',
+            //interval: 'at 11:00 pm'
         },
         {
-            name: 'archiveBustabit',
-            interval: 'at 11:10 pm'
+            name: 'archiveBustadice',
+            //interval: 'at 11:10 pm'
         },
         {
             name: 'archiveEthercrash',
-            interval: 'at 11:20 pm'
+            //interval: 'at 11:20 pm'
         },
         {
-            name: 'archiveBustabit',
-            interval: 'at 11:30 pm'
+            name: 'archiveEtherdice',
+            //interval: 'at 11:30 pm'
         },
     ],
 });
@@ -37,4 +37,4 @@ const bree = new Bree({
 const graceful = new Graceful({ brees: [bree] });
 graceful.listen();
 // start all jobs (this is the equivalent of reloading a crontab):
-bree.start();
+module.exports = bree;
