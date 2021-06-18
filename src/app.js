@@ -13,7 +13,11 @@ app.use(morgan(morganOption));
 app.use(helmet());
 app.use(cors());
 
-app.use('/', routes);
+app.use('/sites', routes);
+
+app.get('/', (req, res) => {
+    res.send('Hello, world!')
+});
 
 app.use((error, req, res, next) => {
     let response;
